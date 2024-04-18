@@ -7,11 +7,24 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  build:
+  "Build on linux":
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v3
+
+    - name: Update APT repository
+      run: |
+        sudo apt update
+    
+    - name: Get the LLVM installation script
+      run: |
+        wget https://apt.llvm.org/llvm.sh
+    
+    - name: Install latest LLVM
+      run: >
+        chmod +x llvm.sh
+        sudo ./llvm.sh all
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
