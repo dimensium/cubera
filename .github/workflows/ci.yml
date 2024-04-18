@@ -22,9 +22,8 @@ jobs:
         wget https://apt.llvm.org/llvm.sh
     
     - name: Install latest LLVM
-      run: >
-        chmod +x llvm.sh
-        sudo ./llvm.sh all
+      run: |
+        chmod +x llvm.sh; sudo ./llvm.sh all
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
