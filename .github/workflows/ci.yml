@@ -7,7 +7,7 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  "Build on linux":
+  build-linux:
     runs-on: ubuntu-latest
     
     steps:
