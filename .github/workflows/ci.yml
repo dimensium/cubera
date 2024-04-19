@@ -23,7 +23,7 @@ jobs:
     
     - name: Install latest LLVM
       run: |
-        chmod +x llvm.sh; sudo ./llvm.sh all
+        chmod +x llvm.sh; sudo ./llvm.sh 17 all
 
     - name: Config the latest alternatives
       run: >
