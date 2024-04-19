@@ -21,9 +21,13 @@ jobs:
       run: |
         wget https://apt.llvm.org/llvm.sh
     
-    - name: Install latest LLVM
+    - name: Install LLVM 17
       run: |
         chmod +x llvm.sh; sudo ./llvm.sh 17 all
+    
+    - name: Install Ninja
+      run: |
+        sudo apt install -y ninja
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
@@ -40,6 +44,7 @@ jobs:
         -DCMAKE_CXX_COMPILER="clang++-17"
         -DCMAKE_C_COMPILER="clang-17"
         -DCMAKE_BUILD_TYPE="Debug"
+        -G "Ninja"
         -S ${{ github.workspace }}
 
     - name: Build
@@ -51,3 +56,8 @@ jobs:
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config "Debug"
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - name: 
