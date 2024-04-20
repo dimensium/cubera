@@ -1,4 +1,6 @@
-import <iostream>;
+module;
+
+#include <iostream>
 
 export module main;
 
