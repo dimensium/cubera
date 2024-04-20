@@ -11,19 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Update APT repository
       run: |
         sudo apt update
     
-    - name: Get the LLVM installation script
-      run: |
-        wget https://apt.llvm.org/llvm.sh
+    # - name: Get the LLVM installation script
+    #   run: |
+    #     wget https://apt.llvm.org/llvm.sh
     
-    - name: Install LLVM 17
-      run: |
-        chmod +x llvm.sh; sudo ./llvm.sh 17 all
+    # - name: Install LLVM 17
+    #   run: |
+    #     chmod +x llvm.sh; sudo ./llvm.sh 17 all
     
     - name: Install Ninja
       run: |
@@ -41,8 +41,8 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
         cmake ${{ github.workspace }} -B ${{ steps.strings.outputs.build-output-dir }} -G "Ninja"
-        -DCMAKE_CXX_COMPILER="clang++-17"
-        -DCMAKE_C_COMPILER="clang-17"
+        -DCMAKE_CXX_COMPILER="gcc"
+        -DCMAKE_C_COMPILER="g++"
         -DCMAKE_BUILD_TYPE="Debug"
 
     - name: Build
@@ -57,19 +57,9 @@ jobs:
 
   build-windows:
     runs-on: windows-latest
-    # Run a job for each of the specified target architectures:
-    strategy:
-      matrix:
-        arch:
-          - amd64
-          - amd64_x86
-          - amd64_arm64
     steps:
       - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: ${{ matrix.arch }}
-          vsversion: 2019
 
       - name: Configure CMake
         run: |
