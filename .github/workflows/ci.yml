@@ -63,7 +63,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake ${{ github.workspace }} -B -G "NMake Makefiles"
+          cmake ${{ github.workspace }} -B ${{ github.workspace }}/build -G "NMake Makefiles"
       
       - name: Build
         run: |
