@@ -35,8 +35,8 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
         cmake ${{ github.workspace }} -B ${{ steps.strings.outputs.build-output-dir }} -G "Ninja"
-        -DCMAKE_CXX_COMPILER="g++-13"
-        -DCMAKE_C_COMPILER="gcc-13"
+        -DCMAKE_CXX_COMPILER="clang++-16"
+        -DCMAKE_C_COMPILER="clang-16"
         -DCMAKE_BUILD_TYPE="Debug"
 
     - name: Build
@@ -56,8 +56,8 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
 
       - name: Configure CMake
-        run: |
-          cmake ${{ github.workspace }} -B ${{ github.workspace }}/build -G "Visual Studio 17 2022"
+        run: >
+          cmake ${{ github.workspace }} -B ${{ github.workspace }}/build -G "Visual Studio 17 2022" -A x64
       
       - name: Build
         run: |
