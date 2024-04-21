@@ -57,7 +57,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake ${{ github.workspace }} -B ${{ github.workspace }}/build -G "NMake Makefiles"
+          cmake ${{ github.workspace }} -B ${{ github.workspace }}/build -G "Visual Studio 17 2022"
       
       - name: Build
         run: |
