@@ -2,9 +2,12 @@ module;
 
 #include <iostream>
 
+import lib;
+
 export module main;
 
-void hello()
+int main(int argc, char **argv)
 {
     std::cout << "hello" << std::endl;
+    print();
 }
