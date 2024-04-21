@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 
-add_library(cubera-static)
+add_library(cubera-static "")
 
 file(GLOB_RECURSE CUBERA_SOURCES 
         "./src/*.cpp"
