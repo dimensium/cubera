@@ -31,6 +31,14 @@ jobs:
       run: |
         sudo find /bin/ -type f,l -name "gcc*"
 
+    - name: add LLVM repository key
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+
+    - name: install Clang 17
+      run: |
+        sudo apt-get install clang-17 lldb-17 lld-17
+
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
@@ -43,8 +51,8 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
         cmake ${{ github.workspace }} -B ${{ steps.strings.outputs.build-output-dir }} -G "Ninja"
-        -DCMAKE_CXX_COMPILER="g++-13"
-        -DCMAKE_C_COMPILER="gcc-13"
+        -DCMAKE_CXX_COMPILER="clang++-17"
+        -DCMAKE_C_COMPILER="clang-17"
         -DCMAKE_BUILD_TYPE="Debug"
 
     - name: Build
