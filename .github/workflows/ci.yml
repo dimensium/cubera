@@ -23,6 +23,14 @@ jobs:
         sudo gunzip /usr/local/bin/ninja.gz;
         sudo chmod a+x /usr/local/bin/ninja
 
+    - name: Get existing LLVM Builds
+      run: |
+        sudo find /bin/ -type f,l -name "clang*"
+
+    - name: Get existing GCC Builds
+      run: |
+        sudo find /bin/ -type f,l -name "gcc*"
+
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
